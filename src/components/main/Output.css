@@ -1,0 +1,21 @@
+.output {
+  width: 30%;
+  background: url('../../assets/images/bg-main-desktop.png') no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.output .images {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.output .images .front-card {
+  background: url('../../assets/images/bg-card-front.png') no-repeat;
+  width: 100%;
+}
