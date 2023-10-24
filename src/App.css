@@ -11,6 +11,10 @@
 
 :root {
   --font-color-primary: hsl(0, 0%, 100%);
+  --font-color-secondary: hsl(278, 68%, 11%);
+  --border-color-primary: hsl(270, 3%, 87%);
+  --hover-color: hsl(278, 94%, 30%);
+  --error-color: hsl(0, 100%, 66%);
 }
 
 html {
@@ -18,7 +22,18 @@ html {
   font-family: SpaceGrotesk, Arial, Helvetica, sans-serif;
 }
 
-p {
-  color: var(--font-color-primary);
+p,
+label,
+::placeholder {
   font-size: 1.5rem;
+}
+
+label {
+  color: var(--font-color-secondary);
+  letter-spacing: 2.5px;
+}
+
+p,
+h2 {
+  color: var(--font-color-primary);
 }
