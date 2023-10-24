@@ -1,9 +1,24 @@
+@font-face {
+  font-family: SpaceGrotesk;
+  src: url('./assets/fonts/SpaceGrotesk-VariableFont_wght.ttf');
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+:root {
+  --font-color-primary: hsl(0, 0%, 100%);
+}
+
 html {
   font-size: 62.5%;
+  font-family: SpaceGrotesk, Arial, Helvetica, sans-serif;
+}
+
+p {
+  color: var(--font-color-primary);
+  font-size: 1.5rem;
 }

@@ -13,9 +13,57 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  overflow: visible;
 }
 
 .output .images .front-card {
   background: url('../../assets/images/bg-card-front.png') no-repeat;
+  margin-left: 175px;
+}
+
+.output .images .front-card > h2 {
+  padding-top: 15%;
+}
+
+.output .images .front-card .name-date {
+  display: flex;
+  justify-content: space-between;
+}
+
+.output .images .front-card .name-date > p {
+  padding-top: 5%;
+}
+
+.output .images .front-card img {
+  width: 30%;
+}
+
+.output .images .front-card h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  letter-spacing: 2.5px;
+  color: var(--font-color-primary);
+}
+
+.output .images .back-card {
+  background: url('../../assets/images/bg-card-back.png') no-repeat;
+  margin-left: 350px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.output .images .back-card p {
+  font-size: ;
+}
+
+.card-back {
+  background-size: cover;
+  background-position: center;
   width: 100%;
+  height: 220px;
+  margin-bottom: 25px;
+  border-radius: 7.5px;
+  padding: 7.5%;
 }
