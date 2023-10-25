@@ -1,13 +1,19 @@
+import PropTypes from 'prop-types';
 /* CSS */
 import './InputForm.css';
 
-const InputForm = () => {
+const InputForm = ({ cardData, onSetCardData }) => {
   return (
     <div className="input">
       <form className="form">
         <div className="cardholder">
           <label htmlFor="name">CARDHOLDER NAME</label>
-          <input type="text" id="name" placeholder="e.g. Jane Appleseed" />
+          <input
+            type="text"
+            id="name"
+            placeholder="e.g. Jane Appleseed"
+            value={cardData.cardHolder}
+          />
         </div>
         <div className="card-number">
           <label htmlFor="number">CARD NMUBER</label>
@@ -30,6 +36,11 @@ const InputForm = () => {
       </form>
     </div>
   );
+};
+
+InputForm.propTypes = {
+  cardData: PropTypes.object,
+  onSetCardData: PropTypes.func,
 };
 
 export default InputForm;
