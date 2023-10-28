@@ -1,9 +1,45 @@
+let returnValidate;
+
 export const validateForm = (cardData, setErrorHandler) => {
+  returnValidate = true;
+
+  // check if is correct format
+  if (
+    isNaN(cardData.cardNumber.replace(/ /g, '')) ||
+    cardData.cardNumber.replace(/ /g, '').length < 16 ||
+    cardData.cardNumber.replace(/ /g, '').length > 16
+  ) {
+    setErrorMessages(setErrorHandler, null, 'Wrong format, numbers only', 'cardNumber');
+  }
+
+  if (
+    cardData.expMonth < 1 ||
+    cardData.expMonth > 12 ||
+    isNaN(cardData.expMonth) ||
+    cardData.expMonth.length < 2
+  ) {
+    setErrorMessages(setErrorHandler, null, 'Wrong format, e.g. 01', 'expMonth');
+  }
+
+  if (
+    cardData.expYear < 1 ||
+    cardData.expYear > 12 ||
+    isNaN(cardData.expYear) ||
+    cardData.expMonth.length < 2
+  ) {
+    setErrorMessages(setErrorHandler, null, 'Wrong format, e.g. 12', 'expYear');
+  }
+
+  if (cardData.cvc.length > 3 || cardData.cvc.length < 3 || isNaN(cardData.cvc)) {
+    setErrorMessages(setErrorHandler, null, 'Wrong format, only 3 Numbers', 'cvc');
+  }
+
   // Check if blank
   if (cardData.cardHolder === '' || cardData.cardHolder === null) {
     setErrorMessages(setErrorHandler, "Can't be blank", null, 'cardHolder');
   }
   if (cardData.cardNumber === '' || cardData.cardNumber === null) {
+    console.log('first');
     setErrorMessages(setErrorHandler, "Can't be blank", null, 'cardNumber');
   }
   if (cardData.expMonth === '' || cardData.expMonth === null) {
@@ -16,20 +52,7 @@ export const validateForm = (cardData, setErrorHandler) => {
     setErrorMessages(setErrorHandler, "Can't be blank", null, 'cvc');
   }
 
-  // check if is correct format
-  if (isNaN(cardData.cardNumber.replace(/ /g, ''))) {
-    setErrorMessages(setErrorHandler, null, 'Wrong format, numbers only', 'cardNumber');
-  }
-
-  if (cardData.expMonth < 1 || cardData.expMonth > 12 || isNaN(cardData.expMonth)) {
-    setErrorMessages(setErrorHandler, null, 'Wrong format, numbers only', 'expMonth');
-  }
-
-  if (cardData.expYear < 1 || cardData.expYear > 12 || isNaN(cardData.expYear)) {
-    setErrorMessages(setErrorHandler, null, 'Wrong format, numbers only', 'expYear');
-  }
-
-  // console.log(errorHandler);
+  return returnValidate;
 };
 
 const setErrorMessages = (setErrorHandler, emptyError, formatError, index) => {
@@ -38,6 +61,11 @@ const setErrorMessages = (setErrorHandler, emptyError, formatError, index) => {
     [index]: {
       emptyMsg: emptyError,
       wrongFormatMsg: formatError,
+      isError: true,
     },
   }));
+
+  if (returnValidate) {
+    returnValidate = !returnValidate;
+  }
 };

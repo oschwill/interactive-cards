@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 /* CSS */
 import './InputForm.css';
+import InputField from './inputform/InputField';
 
 const InputForm = ({ cardData, onSetCardData, onHandleSubmitForm, errorHandler }) => {
   const checkCardNumber = (cardNumber) => {
@@ -8,10 +9,10 @@ const InputForm = ({ cardData, onSetCardData, onHandleSubmitForm, errorHandler }
       return;
     }
 
-    // cardNumber = cardNumber
-    //   .replace(/[^\dA-Z]/g, '')
-    //   .replace(/(.{4})/g, '$1 ')
-    //   .trim();
+    cardNumber = cardNumber
+      .replace(/[^\dA-Z]/g, '')
+      .replace(/(.{4})/g, '$1 ')
+      .trim();
 
     onSetCardData({
       ...cardData,
@@ -19,58 +20,57 @@ const InputForm = ({ cardData, onSetCardData, onHandleSubmitForm, errorHandler }
     });
   };
 
+  const checkCardHolder = (cardHolder) => {
+    if (cardHolder.length > 35) {
+      return;
+    }
+
+    onSetCardData({
+      ...cardData,
+      cardHolder: cardHolder,
+    });
+  };
+
+  const checkCvC = (cvc) => {
+    if (cvc.length > 3) {
+      return;
+    }
+    onSetCardData({
+      ...cardData,
+      cvc: cvc,
+    });
+  };
+
   return (
     <div className="input">
       <form className="form" onSubmit={onHandleSubmitForm}>
-        <div className="cardholder">
-          <label htmlFor="name">CARDHOLDER NAME</label>
-          <input
-            className=""
-            type="text"
-            id="name"
-            placeholder="e.g. Jane Appleseed"
-            value={cardData.cardHolder}
-            onChange={(e) => {
-              if (e.target.value.length > 35) {
-                return;
-              }
-
-              onSetCardData({
-                ...cardData,
-                cardHolder: e.target.value,
-              });
-            }}
-          />
-          {errorHandler.cardHolder && (
-            <span className="error-font">
-              {(errorHandler.cardHolder.emptyMsg && errorHandler.cardHolder.emptyMsg) ||
-                (errorHandler.cardHolder.wrongFormatMsg && errorHandler.cardHolder.wrongFormatMsg)}
-            </span>
-          )}
-        </div>
-        <div className="card-number">
-          <label htmlFor="number">CARD NUMBER</label>
-          <input
-            className=""
-            type="text"
-            id="number"
-            placeholder="e.g. 1234 5678 9123 0000"
-            value={cardData.cardNumber}
-            onChange={(e) => checkCardNumber(e.target.value)}
-          />
-          {errorHandler.cardNumber && (
-            <span className="error-font">
-              {(errorHandler.cardNumber.emptyMsg && errorHandler.cardNumber.emptyMsg) ||
-                (errorHandler.cardNumber.wrongFormatMsg && errorHandler.cardNumber.wrongFormatMsg)}
-            </span>
-          )}
-        </div>
+        <InputField
+          errorhandler={errorHandler.cardHolder}
+          labelName="CARDHOLDER NAME"
+          onSetCardData={checkCardHolder}
+          cardDataValue={cardData.cardHolder}
+          divClass="cardholder"
+          idName="name"
+          cardData={cardData}
+          placeholder="e.g. Jane Appleseed"
+        />
+        <InputField
+          errorhandler={errorHandler.cardNumber}
+          labelName="CARD NUMBER"
+          onSetCardData={checkCardNumber}
+          cardDataValue={cardData.cardNumber}
+          divClass="card-number"
+          idName="number"
+          placeholder="e.g. 1234 5678 9123 0000"
+        />
         <div className="date-cvc">
           <div className="date">
             <label htmlFor="date">EXP. DATE (MM/YY)</label>
             <div className="date-input">
               <input
-                className=""
+                className={
+                  errorHandler.expMonth && errorHandler.expMonth.isError ? 'error-border' : ''
+                }
                 type="text"
                 id="date"
                 name="month"
@@ -86,14 +86,11 @@ const InputForm = ({ cardData, onSetCardData, onHandleSubmitForm, errorHandler }
                   });
                 }}
               />
-              {errorHandler.expMonth && (
-                <span className="error-font date-span">
-                  {(errorHandler.expMonth.emptyMsg && errorHandler.expMonth.emptyMsg) ||
-                    (errorHandler.expMonth.wrongFormatMsg && errorHandler.expMonth.wrongFormatMsg)}
-                </span>
-              )}
+
               <input
-                className=""
+                className={
+                  errorHandler.expYear && errorHandler.expYear.isError ? 'error-border' : ''
+                }
                 type="text"
                 id="date"
                 name="year"
@@ -109,6 +106,14 @@ const InputForm = ({ cardData, onSetCardData, onHandleSubmitForm, errorHandler }
                   });
                 }}
               />
+            </div>
+            <div className="error-date-span">
+              {errorHandler.expMonth && (
+                <span className="error-font date-span">
+                  {(errorHandler.expMonth.emptyMsg && errorHandler.expMonth.emptyMsg) ||
+                    (errorHandler.expMonth.wrongFormatMsg && errorHandler.expMonth.wrongFormatMsg)}
+                </span>
+              )}
               {errorHandler.expYear && (
                 <span className="error-font date-span">
                   {(errorHandler.expYear.emptyMsg && errorHandler.expYear.emptyMsg) ||
@@ -117,30 +122,15 @@ const InputForm = ({ cardData, onSetCardData, onHandleSubmitForm, errorHandler }
               )}
             </div>
           </div>
-          <div className="cvc">
-            <label htmlFor="cvc">CVC</label>
-            <input
-              type="text"
-              id="cvc"
-              placeholder="e.g. 123"
-              value={cardData.cvc}
-              onChange={(e) => {
-                if (e.target.value.length > 3) {
-                  return;
-                }
-                onSetCardData({
-                  ...cardData,
-                  cvc: e.target.value,
-                });
-              }}
-            />
-            {errorHandler.cvc && (
-              <span className="error-font">
-                {(errorHandler.cvc.emptyMsg && errorHandler.cvc.emptyMsg) ||
-                  (errorHandler.cvc.wrongFormatMsg && errorHandler.cvc.wrongFormatMsg)}
-              </span>
-            )}
-          </div>
+          <InputField
+            errorhandler={errorHandler.cvc}
+            labelName="CVC"
+            onSetCardData={checkCvC}
+            cardDataValue={cardData.cvc}
+            divClass="cvc"
+            idName="cvc"
+            placeholder="e.g. 123"
+          />
         </div>
         <input type="submit" value="Confirm" />
       </form>

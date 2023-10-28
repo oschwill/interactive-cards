@@ -77,6 +77,11 @@ input {
   color: var(--error-color);
 }
 
+.error-date-span {
+  width: 300px;
+}
+
 .date-span {
-  display: block;
+  margin-top: 5px;
+  padding-right: 15px;
 }

@@ -17,38 +17,43 @@ const defaultCardData = {
   cvc: '',
 };
 
-const defaultErrorHandler = {
-  cardHolder: {
-    emptyMsg: '',
-    wrongFormatMsg: '',
-  },
-  cardNumber: {
-    emptyMsg: '',
-    wrongFormatMsg: '',
-  },
-  expMonth: {
-    emptyMsg: '',
-    wrongFormatMsg: '',
-  },
-  expYear: {
-    emptyMsg: '',
-    wrongFormatMsg: '',
-  },
-  cvc: {
-    emptyMsg: '',
-    wrongFormatMsg: '',
-  },
-};
+// const defaultErrorHandler = {
+//   cardHolder: {
+//     emptyMsg: '',
+//     wrongFormatMsg: '',
+//   },
+//   cardNumber: {
+//     emptyMsg: '',
+//     wrongFormatMsg: '',
+//   },
+//   expMonth: {
+//     emptyMsg: '',
+//     wrongFormatMsg: '',
+//   },
+//   expYear: {
+//     emptyMsg: '',
+//     wrongFormatMsg: '',
+//   },
+//   cvc: {
+//     emptyMsg: '',
+//     wrongFormatMsg: '',
+//   },
+// };
 
 const Home = () => {
   const [cardData, setCardData] = useState(defaultCardData);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [errorHandler, setErrorHandler] = useState(defaultErrorHandler);
+  const [errorHandler, setErrorHandler] = useState({});
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
 
+    // reset errorhandler
+    setErrorHandler({});
+
     let isValidate = validateForm(cardData, setErrorHandler, errorHandler);
+
+    console.log(isValidate);
 
     if (!isValidate) {
       return;
@@ -60,7 +65,7 @@ const Home = () => {
   const resetSubmit = () => {
     setIsSubmitted(!isSubmitted);
     setCardData(defaultCardData);
-    setErrorHandler(defaultErrorHandler);
+    setErrorHandler({});
   };
 
   return (

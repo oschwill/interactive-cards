@@ -5,7 +5,6 @@ import cardLogo from '../../assets/images/card-logo.svg';
 import './Output.css';
 
 const Output = ({ cardData }) => {
-  // console.log(cardData);
   return (
     <div className="output">
       <div className="images">
