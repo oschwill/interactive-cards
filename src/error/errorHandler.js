@@ -21,12 +21,7 @@ export const validateForm = (cardData, setErrorHandler) => {
     setErrorMessages(setErrorHandler, null, 'Wrong format, e.g. 01', 'expMonth');
   }
 
-  if (
-    cardData.expYear < 1 ||
-    cardData.expYear > 12 ||
-    isNaN(cardData.expYear) ||
-    cardData.expMonth.length < 2
-  ) {
+  if (isNaN(cardData.expYear) || cardData.expYear.length < 2) {
     setErrorMessages(setErrorHandler, null, 'Wrong format, e.g. 12', 'expYear');
   }
 

@@ -17,29 +17,6 @@ const defaultCardData = {
   cvc: '',
 };
 
-// const defaultErrorHandler = {
-//   cardHolder: {
-//     emptyMsg: '',
-//     wrongFormatMsg: '',
-//   },
-//   cardNumber: {
-//     emptyMsg: '',
-//     wrongFormatMsg: '',
-//   },
-//   expMonth: {
-//     emptyMsg: '',
-//     wrongFormatMsg: '',
-//   },
-//   expYear: {
-//     emptyMsg: '',
-//     wrongFormatMsg: '',
-//   },
-//   cvc: {
-//     emptyMsg: '',
-//     wrongFormatMsg: '',
-//   },
-// };
-
 const Home = () => {
   const [cardData, setCardData] = useState(defaultCardData);
   const [isSubmitted, setIsSubmitted] = useState(false);
