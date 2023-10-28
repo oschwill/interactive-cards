@@ -12,6 +12,7 @@
 :root {
   --font-color-primary: hsl(0, 0%, 100%);
   --font-color-secondary: hsl(278, 68%, 11%);
+  --font-color-tertiary: hsl(279, 6%, 55%);
   --border-color-primary: hsl(270, 3%, 87%);
   --hover-color: hsl(278, 94%, 30%);
   --error-color: hsl(0, 100%, 66%);

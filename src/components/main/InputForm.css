@@ -76,3 +76,7 @@ input {
 .error-font {
   color: var(--error-color);
 }
+
+.date-span {
+  display: block;
+}
