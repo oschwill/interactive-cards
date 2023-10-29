@@ -34,7 +34,6 @@ export const validateForm = (cardData, setErrorHandler) => {
     setErrorMessages(setErrorHandler, "Can't be blank", null, 'cardHolder');
   }
   if (cardData.cardNumber === '' || cardData.cardNumber === null) {
-    console.log('first');
     setErrorMessages(setErrorHandler, "Can't be blank", null, 'cardNumber');
   }
   if (cardData.expMonth === '' || cardData.expMonth === null) {

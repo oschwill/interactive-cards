@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 /* CSS */
 import './InputForm.css';
 import InputField from './inputform/InputField';
+import DateField from './inputform/DateField';
 
 const InputForm = ({ cardData, onSetCardData, onHandleSubmitForm, errorHandler }) => {
   const checkCardNumber = (cardNumber) => {
@@ -64,64 +65,13 @@ const InputForm = ({ cardData, onSetCardData, onHandleSubmitForm, errorHandler }
           placeholder="e.g. 1234 5678 9123 0000"
         />
         <div className="date-cvc">
-          <div className="date">
-            <label htmlFor="date">EXP. DATE (MM/YY)</label>
-            <div className="date-input">
-              <input
-                className={
-                  errorHandler.expMonth && errorHandler.expMonth.isError ? 'error-border' : ''
-                }
-                type="text"
-                id="date"
-                name="month"
-                placeholder="MM"
-                value={cardData.expMonth}
-                onChange={(e) => {
-                  if (e.target.value.length > 2 || isNaN(e.target.value)) {
-                    return;
-                  }
-                  onSetCardData({
-                    ...cardData,
-                    expMonth: e.target.value,
-                  });
-                }}
-              />
-
-              <input
-                className={
-                  errorHandler.expYear && errorHandler.expYear.isError ? 'error-border' : ''
-                }
-                type="text"
-                id="date"
-                name="year"
-                placeholder="YY"
-                value={cardData.expYear}
-                onChange={(e) => {
-                  if (e.target.value.length > 2 || isNaN(e.target.value)) {
-                    return;
-                  }
-                  onSetCardData({
-                    ...cardData,
-                    expYear: e.target.value,
-                  });
-                }}
-              />
-            </div>
-            <div className="error-date-span">
-              {errorHandler.expMonth && (
-                <span className="error-font date-span">
-                  {(errorHandler.expMonth.emptyMsg && errorHandler.expMonth.emptyMsg) ||
-                    (errorHandler.expMonth.wrongFormatMsg && errorHandler.expMonth.wrongFormatMsg)}
-                </span>
-              )}
-              {errorHandler.expYear && (
-                <span className="error-font date-span">
-                  {(errorHandler.expYear.emptyMsg && errorHandler.expYear.emptyMsg) ||
-                    (errorHandler.expYear.wrongFormatMsg && errorHandler.expYear.wrongFormatMsg)}
-                </span>
-              )}
-            </div>
-          </div>
+          <DateField
+            errorHandler={{ expMonth: errorHandler.expMonth, expYear: errorHandler.expYear }}
+            labelName="EXP. DATE (MM/YY)"
+            onSetCardData={onSetCardData}
+            cardDataValue={{ expMonth: cardData.expMonth, expYear: cardData.expYear }}
+            cardData={cardData}
+          />
           <InputField
             errorhandler={errorHandler.cvc}
             labelName="CVC"

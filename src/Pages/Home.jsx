@@ -30,8 +30,6 @@ const Home = () => {
 
     let isValidate = validateForm(cardData, setErrorHandler, errorHandler);
 
-    console.log(isValidate);
-
     if (!isValidate) {
       return;
     }

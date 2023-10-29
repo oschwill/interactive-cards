@@ -43,7 +43,7 @@
   }
 }
 
-@media (max-width: 940px) {
+@media (max-width: 990px) {
   main {
     flex-direction: column;
     margin-bottom: 10%;
@@ -83,6 +83,11 @@
   .input .form .date-cvc {
     width: 100%;
   }
+
+  .success {
+    width: 100%;
+    margin-top: 75px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -95,11 +100,13 @@
 
   .output .images .card-back {
     position: absolute;
+    width: 85%;
+    height: 250px;
   }
 
   .output .images .back-card {
     z-index: 1;
-    top: 5%;
+    top: 3%;
   }
 
   .output .images .front-card {
@@ -107,12 +114,34 @@
     top: 22%;
   }
 
-  .output .images .card-back {
-    width: 475px;
-    height: 250px;
-  }
-
   main .input {
     margin-top: 100px;
+  }
+
+  .input .form {
+    gap: 20px;
+  }
+
+  .input .form .cardholder,
+  .input .form .card-number {
+    gap: 0;
+  }
+
+  .input .form .date-cvc label {
+    margin-bottom: 0;
+  }
+
+  .output .images .back-card {
+    right: 0;
+  }
+}
+
+@media (max-width: 470px) {
+  label {
+    font-size: 1rem;
+  }
+
+  .output .images .front-card h2 {
+    font-size: 1.25rem;
   }
 }
